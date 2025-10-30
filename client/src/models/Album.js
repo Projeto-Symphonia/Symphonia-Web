@@ -5,7 +5,7 @@ const AlbumSchema = new mongoose.Schema({
     photo: {type: String},
     description: {type: String},
     musics: [{type: mongoose.Types.ObjectId, ref: 'musics'}]
-})
+}, {versionKey: false})
 
 const album = mongoose.model("albums", AlbumSchema);
 

@@ -2,23 +2,23 @@ import album from "../models/Album.js";
 
 class AlbumController {
     //MÉTODO GET lista albums
-    static async listAlbums(req, res) {
+    static async getAlbums(req, res) {
         try {
-            const albumsList = await album.find({});
-            res.status(200).json(albumsList);
+            const albums = await album.find();
+            res.status(200).json(albums);
         } catch (e) {
             res.status(500).json({
-                message: `listing album failed`,
+                message: `getting albums failed`,
                 error: e.message,
             });
         }
     }
 
     //MÉTODO GET lista album por id
-    static async listAlbumByID(req, res) {
+    static async getAlbumByID(req, res) {
         try {
             const id = req.params.id;
-            const especificAlbum = await album.findById(id);
+            const especificAlbum = await album.findById(id).populate("musics");
             res.status(200).json(especificAlbum);
         } catch (e) {
             res.status(500).json({
@@ -29,7 +29,7 @@ class AlbumController {
     }
 
     //MÉTODO POST cria album
-    static async registerAlbum(req, res) {
+    static async createAlbum(req, res) {
         try {
             const newAlbum = req.body;
             await album.create(newAlbum);
@@ -61,6 +61,23 @@ class AlbumController {
                 message: `album update failed`,
                 eror: e.message,
             });
+        }
+    }
+
+    //método DELETE, deleta album pelo ID
+    static async deleteAlbumByID(req, res) {
+        try {
+            const id = req.params.id
+            const albumToDelete = await album.findByIdAndDelete(id)
+            res.status(200).json({
+                message: "album deleted!",
+                albumDeleted: albumToDelete
+            })
+        } catch (e) {
+            res.status(500).json({
+                message: "album delete failed",
+                error: e.message
+            })
         }
     }
 }
