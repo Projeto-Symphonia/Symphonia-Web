@@ -1,26 +1,13 @@
 import express from "express";
-import album from "../models/Album.js";
+import albumRouter from "./albumsRoutes.js";
+
+const routesArray = [albumRouter]
 
 function routes(app) {
     app.get("/", (req, res) => {
-        res.send("projeto symphonia");
-    });
+        res.send("hello world!")
+    })
 
-    app.use(express.json());
-
-    app.get("/albums", async (req, res) => {
-        try {
-            const albumsList = await album.find({});
-            res.status(200).json(albumsList);
-        } catch (error) {
-            res.status(500).json({
-                message: `${error.message} - listing books failed`,
-            });
-        }
-    });
-
-    app.post("/albums", (req, res) => {
-        
-    });
+    app.use(express.json(), routesArray);
 }
 export default routes;
