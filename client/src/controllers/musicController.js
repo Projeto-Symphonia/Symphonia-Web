@@ -18,7 +18,9 @@ class MusicController {
     static async getMusicByID(req, res) {
         try {
             const id = req.params.id;
-            const especificMusic = await music.findById(id);
+
+            //aqui ta referenciando 'albums' no 'albumID pra pegar o album especifico, e no campo à direita especificando que só retorne o atributo "photo"
+            const especificMusic = await music.findById(id).populate('albumID', "photo"); 
             res.status(200).json(especificMusic);
         } catch (e) {
             res.status(500).json({

@@ -1,8 +1,9 @@
 import express from "express";
 import albumRouter from "./albumsRoutes.js";
 import musicRouter from "./musicsRoutes.js"
+import postRouter from "./postsRoutes.js";
 
-const routesArray = [albumRouter, musicRouter]
+const routesArray = [albumRouter, musicRouter, postRouter]
 
 function routes(app) {
     app.get("/", (req, res) => {
