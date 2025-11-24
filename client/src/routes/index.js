@@ -7,7 +7,7 @@ const routesArray = [albumRouter, musicRouter, postRouter]
 
 function routes(app) {
     app.get("/", (req, res) => {
-        res.send("hello world!")
+        res.send("api symphonia project")
     })
 
     app.use(express.json(), routesArray);
