@@ -3,7 +3,7 @@ import post from "../models/Post.js";
 class PostController {
     static async getPosts(req, res) {
         try {
-            const posts = await post.find();
+            const posts = await post.find().populate("albumID");
             res.status(200).json(posts);
         } catch (e) {
             res.status(500).json({ message: "getting posts failed", error: e });
