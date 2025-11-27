@@ -8,10 +8,10 @@ export default function RegisterPage() {
          <h1>Página de registro</h1>
          <button
             onClick={() => {
-               navigate("/user/:1234");
+               navigate("/home");
             }}
          >
-            pagina do usuário
+            ir para home
          </button>
       </>
    );

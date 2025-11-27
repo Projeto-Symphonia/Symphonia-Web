@@ -1,9 +1,13 @@
-export default function PostPage(props){
+export default function PagePost({ album, avaliation, comment, user, title }) {
+    if (user == null) {
+        user = "unkown";
+    }
     return (
         <div>
-            <h1>usuario default</h1>
-            <p>{props.avaliation}</p>
-            <p>{props.album}</p>
+            <h1>{user}</h1>
+            <p>{comment}</p>
+            <p>{avaliation}</p>
+            <p>{album.title}</p>
         </div>
-    )
+    );
 }

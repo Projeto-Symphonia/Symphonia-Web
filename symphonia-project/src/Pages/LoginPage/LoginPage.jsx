@@ -8,10 +8,10 @@ export default function LoginPage() {
          <h1>Página de login</h1>
          <button
             onClick={() => {
-               navigate("/user/:1234");
+               navigate("/home");
             }}
          >
-            pagina do usuário
+            ir para home
          </button>
       </>
    );
