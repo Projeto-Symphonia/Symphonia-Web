@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../services/api";
-import PagePost from "../../Components/PagePost";
+import PagePost from "../../Components/PagePost/PagePost";
 
 //página contendo o feed do site, mostrando posts de usuários variados
 export default function HomePage() {
