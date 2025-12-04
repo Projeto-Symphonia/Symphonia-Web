@@ -22,6 +22,10 @@
     border-radius: 50%;
 }
 
+.user-photo:hover{
+    cursor: pointer;
+}
+
 .album-photo {
     width: 200px;
     height: 200px;

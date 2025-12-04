@@ -1,8 +1,13 @@
 import { useNavigate, useParams } from "react-router-dom";
-
+import { useEffect, useState } from "react";
+import api from "../../services/api";
 export default function UserPage() {
    const { userID } = useParams();
    const navigate = useNavigate();
+
+   useEffect(() => {
+      //api.get(`/posts/${userID}`)
+   }, []);
 
    return (
       <>
@@ -21,6 +26,8 @@ export default function UserPage() {
          >
             voltar para home
          </button>
+
+         
       </>
    );
 }

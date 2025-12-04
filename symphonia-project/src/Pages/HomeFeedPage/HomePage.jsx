@@ -3,10 +3,12 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../services/api";
 import PagePost from "../../Components/PagePost/PagePost";
+import { useAuth } from "../../context/AuthContext";
 
 //página contendo o feed do site, mostrando posts de usuários variados
 export default function HomePage() {
     const [posts, setPosts] = useState([]);
+       const { login, user } = useAuth();
 
     const navigate = useNavigate();
 
@@ -21,7 +23,7 @@ export default function HomePage() {
             <h1>Página da home/feed</h1>
             <button
                 onClick={() => {
-                    navigate("/user/1234");
+                    navigate(`/user/${user._id}`);
                 }}
             >
                 pagina do usuário

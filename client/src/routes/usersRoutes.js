@@ -7,9 +7,13 @@ const userRouter = express.Router();
 userRouter.get("/users", UserController.getUsers)
 
 //get user by id
-userRouter.get("/user/:id", UserController.getUserByID)
+userRouter.get("/users/:id", UserController.getUserByID)
 
 //create user
 userRouter.post("/users", UserController.createUser)
+
+//
+userRouter.put("/users/:id", UserController.updateUser)
+
 
 export default userRouter;
