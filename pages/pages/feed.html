@@ -1,65 +1,69 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Feed - Symphonia </title>
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Feed - Symphonia</title>
 
-    <link rel="stylesheet" href="../css/feed.css">
+      <link rel="stylesheet" href="../css/feed.css" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-</head>
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link
+         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;700&display=swap"
+         rel="stylesheet"
+      />
+   </head>
 
-<body>
+   <body>
+      <header class="topo">
+         <img src="../assets/logo.png" alt="Logo" class="logo" />
 
-    <header class="topo">
-        <img src="../assets/logo.png" alt="Logo" class="logo">
+         <input type="text" placeholder="Pesquise aqui..." class="pesquisa" />
 
-        <input type="text" placeholder="Pesquise aqui..." class="pesquisa">
+         <div class="perfil-topo"></div>
+      </header>
 
-        <div class="perfil-topo"></div>
-    </header>
+      <button class="btn-criar">Criar Avaliação</button>
 
-    <button class="btn-criar">Criar Avaliação</button>
+      <main class="feed">
+         <div class="post">
+            <div class="barra-superior">
+              
 
-    <main class="feed">
+               <span class="avaliacao">Avaliação por</span>
+               <span class="user">@TijoloBaiano</span>
+               <span class="tempo">Há 15 segundos</span>
 
-        <div class="post">
+               <div class="icones">
+                  <img
+                     src="../assets/favorite.png"
+                     class="icon-heart"
+                     alt="Curtir"
+                  />
+                  <span class="like-count">1</span>
 
-    <div class="barra-superior">
+                  <img
+                     src="../assets/comment.png"
+                     class="icon-comment"
+                     alt="Comentar"
+                  />
+               </div>
+            </div>
 
-        <div class="perfil-post"></div>
+            <div class="conteudo">
+               <div class="capa-musica"></div>
 
-        <span class="avaliacao">Avaliação por</span>
-        <span class="user">@TijoloBaiano</span>
-        <span class="tempo">Há 15 segundos</span>
+               <div class="info-musica">
+                  <div class="estrelas">⭐⭐⭐⭐⭐</div>
 
-        <div class="icones">
-
-            <img src="../assets/favorite.png" class="icon-heart" alt="Curtir">
-            <span class="like-count">1</span>
-
-            <img src="../assets/comment.png" class="icon-comment" alt="Comentar">
-
-        </div>
-    </div>
-
-    <div class="conteudo">
-        <div class="capa-musica"></div>
-
-        <div class="info-musica">
-            <div class="estrelas">⭐⭐⭐⭐⭐</div>
-
-            <h3 class="titulo">Friends</h3>
-            <p class="banda">Vacations</p>
-            <p class="avaliacao-texto">Eu adorei demais essa música muito foda</p>
-        </div>
-    </div>
-
-</div>
-
-    </main>
-
-</body>
+                  <h3 class="titulo">Friends</h3>
+                  <p class="banda">Vacations</p>
+                  <p class="avaliacao-texto">
+                     Eu adorei demais essa música muito foda
+                  </p>
+               </div>
+            </div>
+         </div>
+      </main>
+   </body>
 </html>
