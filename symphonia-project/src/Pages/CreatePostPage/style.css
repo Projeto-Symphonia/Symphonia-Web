@@ -1,0 +1,23 @@
+.topo {
+   width: 100%;
+   height: 75px;
+   background: #000;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   padding: 0 40px;
+   box-sizing: border-box;
+}
+
+.logo {
+   width: 235px;
+   height: 48px;
+}
+
+.perfil-topo {
+   width: 45px;
+   height: 45px;
+   background: #d9d9d9;
+   border-radius: 50%;
+   object-fit: cover;
+}

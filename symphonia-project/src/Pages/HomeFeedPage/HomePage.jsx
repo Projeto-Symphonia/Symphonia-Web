@@ -4,12 +4,14 @@ import { useNavigate } from "react-router-dom";
 import api from "../../services/api";
 import PagePost from "../../Components/PagePost/PagePost";
 import { useAuth } from "../../context/AuthContext";
+import { SearchBar } from "../../Components/SearchBar/SearchBar";
 
 import "./style.css";
 
 //página contendo o feed do site, mostrando posts de usuários variados
 export default function HomePage() {
    const [posts, setPosts] = useState([]);
+   const [searchResults, setSearchResults] = useState([]);
    const { login, user } = useAuth();
 
    const navigate = useNavigate();
@@ -18,6 +20,7 @@ export default function HomePage() {
       api.get("/posts").then((response) => {
          console.log(response.data);
          setPosts(response.data);
+         setSearchResults(response.data);
       });
    }, []);
 
@@ -36,13 +39,15 @@ export default function HomePage() {
             */}
 
             <header className="topo">
-               <img src="../assets/logo.png" alt="Logo" className="logo" />
+               <img src="../src/assets/logo.png" alt="Logo" className="logo" />
 
-               <input
+               <SearchBar posts={posts} setSearchResults={setSearchResults} />
+
+               {/* <input
                   type="text"
                   placeholder="Pesquise aqui..."
                   className="pesquisa"
-               />
+               /> */}
 
                <img onClick={()=>{navigate(`/user/${user._id}`)}} className="perfil-topo" src={user?.photo} alt="user-photo" />
             </header>
@@ -50,9 +55,9 @@ export default function HomePage() {
             {/*<button className="btn-criar">Criar Avaliação</button>*/}
 
             <main className="feed">
-               {posts.map((post) => {
+               {searchResults.map((post) => {
                   return (
-                     <PagePost
+                     <PagePost searchResults = {searchResults}
                         key={post._id}
                         user={post.userID}
                         album={post.albumID}
