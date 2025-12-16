@@ -9,8 +9,7 @@ export const SearchBar = ({ posts, setSearchResults }) => {
 
         const resultsArray = posts.filter(
             (post) =>
-                post.title.includes(e.target.value) ||
-                post.comment.includes(e.target.value)
+                post.userID?.name.toLowerCase().includes(e.target.value)
         );
         setSearchResults(resultsArray);
     };

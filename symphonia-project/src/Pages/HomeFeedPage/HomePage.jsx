@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import api from "../../services/api";
 import PagePost from "../../Components/PagePost/PagePost";
 import { useAuth } from "../../context/AuthContext";
-
 import "./style.css";
 import Navbar from "../../Components/Navbar/Navbar";
 
@@ -38,15 +37,14 @@ export default function HomePage() {
             </button>
             */}
 
-                <Navbar />
+                <Navbar posts={posts} setSearchResults={setSearchResults} />
 
                 {/*<button className="btn-criar">Criar Avaliação</button>*/}
 
                 <main className="feed">
-                    {posts.map((post) => {
+                    {searchResults.map((post) => {
                         return (
                             <PagePost
-                                searchResults={searchResults}
                                 key={post._id}
                                 user={post.userID}
                                 album={post.albumID}
