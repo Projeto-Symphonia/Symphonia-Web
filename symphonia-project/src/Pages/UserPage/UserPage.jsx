@@ -6,7 +6,7 @@ export default function UserPage() {
    const navigate = useNavigate();
 
    useEffect(() => {
-      //api.get(`/posts/${userID}`)
+      api.get(`/posts/${userID}`)
    }, []);
 
    return (
