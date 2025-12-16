@@ -21,7 +21,7 @@ export default function Navbar() {
     return (
         <>
             <header className="topo">
-                <img src="../src/assets/logo.png" alt="Logo" className="logo" />
+                <img onClick={()=>{navigate("/home")}} src="../src/assets/logo.png" alt="Logo" className="logo" />
 
                 <SearchBar posts={posts} setSearchResults={setSearchResults} />
 
@@ -33,7 +33,7 @@ export default function Navbar() {
 
                 <img
                     onClick={() => {
-                        navigate(`/user/${user._id}`);
+                        navigate(`/user/${user?._id}`);
                     }}
                     className="perfil-topo"
                     src={user?.photo}

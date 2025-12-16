@@ -2,34 +2,47 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import api from "../../services/api";
 import Navbar from "../../Components/Navbar/Navbar";
+import PagePost from "../../Components/PagePost/PagePost";
+import { useAuth } from "../../context/AuthContext";
+
 export default function UserPage() {
-   const { userID } = useParams();
-   const navigate = useNavigate();
+    const [posts, setPosts] = useState([]);
 
-   useEffect(() => {
-      api.get(`/posts/${userID}`)
-   }, []);
+    const { userID } = useParams();
+    const navigate = useNavigate();
 
-   return (
-      <>
-         <Navbar />
-         <h1>usuário: {userID}</h1>
-         <button
-            onClick={() => {
-               navigate("/create-post");
-            }}
-         >
-            fazer avaliação
-         </button>
-         <button
-            onClick={() => {
-               navigate("/home");
-            }}
-         >
-            voltar para home
-         </button>
+    useEffect(() => {
+        api.get(`/users/${userID}`).then((response) => {
+            console.log(response.data.posts);
+            setPosts(response.data.posts)
+        });
+    }, [navigate]);
 
-         
-      </>
-   );
+    return (
+        <>
+            <Navbar />
+            <button
+                onClick={() => {
+                    navigate("/create-post");
+                }}
+            >
+                fazer avaliação
+            </button>
+
+            <main>
+                {posts.map((post) => {
+                    return (
+                        <PagePost
+                            key={post._id}
+                            user={post.userID}
+                            album={post.albumID}
+                            avaliation={post.avaliation}
+                            title={post.title}
+                            comment={post.comment}
+                        />
+                    );
+                })}
+            </main>
+        </>
+    );
 }

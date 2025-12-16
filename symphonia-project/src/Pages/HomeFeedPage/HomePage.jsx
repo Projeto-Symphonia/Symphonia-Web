@@ -43,7 +43,7 @@ export default function HomePage() {
                 {/*<button className="btn-criar">Criar Avaliação</button>*/}
 
                 <main className="feed">
-                    {searchResults.map((post) => {
+                    {posts.map((post) => {
                         return (
                             <PagePost
                                 searchResults={searchResults}

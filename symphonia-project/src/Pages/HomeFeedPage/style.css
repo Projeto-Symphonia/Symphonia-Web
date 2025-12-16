@@ -22,6 +22,11 @@ body {
 .logo {
    width: 235px;
    height: 48px;
+   transition: opacity 0.15s;
+}
+.logo:hover{
+   cursor: pointer;
+   opacity: 0.8;
 }
 
 .pesquisa {
@@ -33,6 +38,7 @@ body {
    font-size: 20px;
    font-weight: 700;
    color: #808080;
+   overflow-y: hidden;
 }
 
 .perfil-topo {
