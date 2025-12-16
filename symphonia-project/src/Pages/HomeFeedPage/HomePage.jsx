@@ -38,7 +38,7 @@ export default function HomePage() {
             </button>
             */}
 
-                <Navbar posts={posts} setSearchResults={setSearchResults}/>
+                <Navbar />
 
                 {/*<button className="btn-criar">Criar Avaliação</button>*/}
 

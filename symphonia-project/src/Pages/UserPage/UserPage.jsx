@@ -1,6 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import api from "../../services/api";
+import Navbar from "../../Components/Navbar/Navbar";
 export default function UserPage() {
    const { userID } = useParams();
    const navigate = useNavigate();
@@ -11,6 +12,7 @@ export default function UserPage() {
 
    return (
       <>
+         <Navbar />
          <h1>usuário: {userID}</h1>
          <button
             onClick={() => {
