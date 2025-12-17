@@ -74,21 +74,23 @@ export default function RegisterPage() {
                         {error && <div style={{ color: "red" }}>{error}</div>}
 
                         <div className="botoes">
-                            <button class="btn-criar" type="submit">
-                                Criar conta
-                            </button>
                             <button
-                                class="btn-voltar"
+                                className="btn-voltar"
                                 type="button"
                                 onClick={() => navigate(-1)}
                             >
                                 Voltar
                             </button>
+                            <button 
+                            className="btn-cria" 
+                            type="submit"
+                            >
+                                Criar conta
+                            </button>
                         </div>
                     </div>
                 </div>
             </form>
-            *
         </>
     );
 }

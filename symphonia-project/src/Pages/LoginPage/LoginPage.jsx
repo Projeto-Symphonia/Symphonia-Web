@@ -41,14 +41,14 @@ export default function LoginPage() {
                         </p>
 
                         <div className="grupo">
-                            <label>Nome de usuário:</label>
+                            <label>Nome de usuário</label>
                             <input
                                 value={username}
                                 onChange={(e) => setUsername(e.target.value)}
                             />
                         </div>
                         <div className="grupo">
-                            <label>Senha:</label>
+                            <label>Senha</label>
                             <input
                                 type="password"
                                 value={password}

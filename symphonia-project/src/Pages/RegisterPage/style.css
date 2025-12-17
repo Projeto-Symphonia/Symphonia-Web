@@ -116,10 +116,12 @@ body {
     border: none;
     border-radius: 10px;
     cursor: pointer;
+    position: relative;
+    left: 120px;
 }
 
 /* criar conta */
-.btn-criar {
+.btn-cria {
     width: 156px;
     height: 55px;
     background: #00acea;
@@ -127,15 +129,19 @@ body {
     font-weight: 700;
     border: none;
     border-radius: 20px;
+    cursor: pointer;
+    position: relative;
+    right: 120px;
+    
 }
 
-.btn-criar,
+.btn-cria,
 .btn-voltar {
     cursor: pointer;
     transition: 0.15s;
 }
 
-.btn-criar:hover,
+.btn-cria:hover,
 .btn-voltar:hover {
     opacity: 0.9;
 }

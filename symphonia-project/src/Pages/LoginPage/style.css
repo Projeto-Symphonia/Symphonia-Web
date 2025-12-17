@@ -97,7 +97,7 @@ body {
     justify-content: space-between;
 }
 
-/* botao devoltar */
+/* botao de voltar */
 .btn-voltar {
     width: 120px;
     height: 55px;
@@ -118,6 +118,8 @@ body {
     font-weight: 700;
     border: none;
     border-radius: 20px;
+    position: relative;
+    right: 120px;
 }
 
 .btn-entrar,
