@@ -97,7 +97,7 @@ export default function UserPage() {
                         <main>
                             <div className="menu">
                                 <div className="column">
-                                    <div className="imagem">
+                                    <div>
                                         <img
                                             src={userFromParam?.photo}
                                             alt="user-photo"
