@@ -73,7 +73,7 @@ body {
 
 /* área central */
 .feed {
-   margin: 40px auto;
+   margin: 0px auto;
    width: 900px;
    height: 1005px;
    background: #2d303c;
