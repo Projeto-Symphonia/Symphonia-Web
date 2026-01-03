@@ -21,3 +21,15 @@
    border-radius: 50%;
    object-fit: cover;
 }
+.album-select {
+   width: 300px;
+   height: 40px;
+   margin-bottom: 20px;
+}
+.album-select .select__option,
+.album-select .select__single-value,
+.album-select .select__placeholder,
+.album-select .select__input-container,
+.album-select .option__label {
+   color: #000;
+}

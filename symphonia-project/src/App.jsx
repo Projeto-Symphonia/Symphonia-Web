@@ -4,7 +4,7 @@ import RegisterPage from "./Pages/RegisterPage/RegisterPage";
 import LoginPage from "./Pages/LoginPage/LoginPage";
 import HomePage from "./Pages/HomeFeedPage/HomePage";
 import UserPage from "./Pages/UserPage/UserPage";
-//import CreatePostPage from "./Pages/CreatePostPage/CreatePostPage";
+import CreatePostPage from "./Pages/CreatePostPage/CreatePostPage";
 
 function App() {
    return (
@@ -15,7 +15,7 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/home" element={<HomePage />} />
             <Route path="/user/:userID" element={<UserPage />} />
-            {/*<Route path="/create-post" element={<CreatePostPage />} />*/}
+            <Route path="/create-post" element={<CreatePostPage />} />
          </Routes>
       </BrowserRouter>
    );

@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 const PostSchema = new mongoose.Schema(
     {
         albumID: { type: mongoose.Types.ObjectId, ref: "albums" }, //POST CONTÉM UM ALBÚM DE REFERÊNCIA, RELACIONAMENTO EM 'REFERENCING'
+        musicID: { type: mongoose.Types.ObjectId, ref: "musics" }, //POST CONTÉM UMA MÚSICA DE REFERÊNCIA, RELACIONAMENTO EM 'REFERENCING'
         userID: { type: mongoose.Types.ObjectId, ref: "users" }, //POST CONTÉM UM USER DE REFERÊNCIA, RELACIONAMENTO EM 'REFERENCING'
         avaliation: { type: Number, required: true },
         title: { type: String },
