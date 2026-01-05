@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import bcrypt from "bcrypt";
 
 const UserSchema = new mongoose.Schema(
     {
@@ -9,6 +10,26 @@ const UserSchema = new mongoose.Schema(
     },
     { versionKey: false }
 );
+
+// Middleware que criptografa a senha antes de salvar :p
+UserSchema.pre("save", async function(next) {
+    if (!this.isModified("password")) {
+        return next();
+    }
+    
+    try {
+        const salt = await bcrypt.genSalt(10);
+        this.password = await bcrypt.hash(this.password, salt);
+        next();
+    } catch (error) {
+        next(error);
+    }
+});
+
+// Método de comparar senha no login
+UserSchema.methods.comparePassword = async function(passwordAttempt) {
+    return await bcrypt.compare(passwordAttempt, this.password);
+};
 
 const user = mongoose.model("users", UserSchema);
 
