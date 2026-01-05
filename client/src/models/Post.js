@@ -8,6 +8,7 @@ const PostSchema = new mongoose.Schema(
         avaliation: { type: Number, required: true },
         title: { type: String },
         comment: { type: String },
+        comments: [{type: mongoose.Types.ObjectId, ref: 'comments'}],
     },
     { versionKey: false }
 );

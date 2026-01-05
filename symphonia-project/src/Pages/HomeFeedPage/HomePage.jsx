@@ -46,6 +46,7 @@ export default function HomePage() {
                         return (
                             <PagePost
                                 key={post._id}
+                                post={post}
                                 user={post.userID}
                                 album={post.albumID}
                                 avaliation={post.avaliation}

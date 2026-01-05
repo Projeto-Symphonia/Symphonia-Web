@@ -2,13 +2,13 @@ import { useNavigate } from "react-router-dom";
 
 import Stars from "../../assets/stars";
 
-export default function PagePost({ album, avaliation, comment, user, title }) {
+export default function PagePost({ album, avaliation, comment, user, title, post }) {
    const navigate = useNavigate();
 
    let username;
    let userphoto;
    if (user == null) {
-      username = "unkown";
+      username = "unknown";
       userphoto =
          "https://i0.wp.com/upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg";
    } else {
@@ -48,7 +48,7 @@ export default function PagePost({ album, avaliation, comment, user, title }) {
                </div>*/}
             </div>
 
-            <div className="conteudo">
+            <div className="conteudo" onClick={()=>{navigate(`/post/comments/${post._id}`)}}>
                <img
                   className="capa-musica"
                   src={album?.photo}

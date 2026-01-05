@@ -40,7 +40,7 @@ class AlbumController {
         } catch (e) {
             res.status(500).json({
                 message: `album registry failed`,
-                eror: e.message,
+                error: e.message,
             });
         }
     }

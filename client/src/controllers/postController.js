@@ -1,10 +1,11 @@
 import post from "../models/Post.js";
 import user from "../models/User.js";
+import comment from "../models/Comment.js";
 
 class PostController {
    static async getPosts(req, res) {
       try {
-         const posts = await post.find().populate("albumID userID");
+         const posts = await post.find().populate("albumID musicID userID comments");
          res.status(200).json(posts);
       } catch (e) {
          res.status(500).json({ message: "getting posts failed", error: e });
@@ -40,6 +41,8 @@ class PostController {
    static async deletePost(req, res) {
       try {
          const postID = req.params.id;
+
+         await comment.deleteMany({ postID: postID });
 
          await post.findByIdAndDelete(postID);
          res.status(200).json({
