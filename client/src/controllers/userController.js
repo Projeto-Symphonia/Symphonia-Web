@@ -49,6 +49,38 @@ class UserController {
         }
     }
 
+    //login user '/users/login'
+    static async loginUser(req, res) {
+        try {
+            const { name, password } = req.body;
+            const foundUser = await user.findOne({ name });
+            
+            if (!foundUser) {
+                return res.status(401).json({ message: "Invalid credentials" });
+            }
+            
+            const passwordMatch = await foundUser.comparePassword(password);
+            
+            if (!passwordMatch) {
+                return res.status(401).json({ message: "Invalid credentials" });
+            }
+            
+            res.status(200).json({
+                message: "Login successful",
+                user: {
+                    id: foundUser._id,
+                    name: foundUser.name,
+                    photo: foundUser.photo,
+                },
+            });
+        } catch (e) {
+            res.status(500).json({
+                message: `login failed`,
+                error: e.message,
+            });
+        }
+    }
+
     static async updateUser(req, res) {
         try {
             const userID = req.params.id;
