@@ -12,7 +12,10 @@ userRouter.get("/users/:id", UserController.getUserByID)
 //create user
 userRouter.post("/users", UserController.createUser)
 
-//
+//login user
+userRouter.post("/users/login", UserController.loginUser)
+
+//update user
 userRouter.put("/users/:id", UserController.updateUser)
 
 
