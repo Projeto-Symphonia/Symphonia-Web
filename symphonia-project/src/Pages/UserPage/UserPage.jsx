@@ -10,14 +10,59 @@ import { useAuth } from "../../context/AuthContext";
 import "./style.css";
 import "./altStyle.css";
 
+function EditNameModal({ isOpen, currentName, onClose, onSave, isLoading }) {
+    const [newName, setNewName] = useState(currentName);
+
+    useEffect(() => {
+        setNewName(currentName);
+    }, [currentName, isOpen]);
+
+    const handleSave = async () => {
+        if (newName.trim() && newName !== currentName) {
+            await onSave(newName);
+        } else {
+            onClose();
+        }
+    };
+
+    if (!isOpen) return null;
+
+    return (
+        <div className="modal-overlay" onClick={onClose}>
+            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                <h2>Editar Nome de Usuário</h2>
+                <input
+                    type="text"
+                    value={newName}
+                    onChange={(e) => setNewName(e.target.value)}
+                    placeholder="Novo nome de usuário"
+                    className="modal-input"
+                    disabled={isLoading}
+                    autoFocus
+                />
+                <div className="modal-buttons">
+                    <button onClick={onClose} disabled={isLoading} className="modal-btn-cancel">
+                        Cancelar
+                    </button>
+                    <button onClick={handleSave} disabled={isLoading} className="modal-btn-save">
+                        {isLoading ? "Salvando..." : "Salvar"}
+                    </button>
+                </div>
+            </div>
+        </div>
+    );
+}
+
 export default function UserPage() {
     const [posts, setPosts] = useState([]);
     const [userFromParam, setUserFromParam] = useState();
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+    const [isUpdating, setIsUpdating] = useState(false);
 
     const { userID } = useParams();
     const navigate = useNavigate();
 
-    const { user } = useAuth();
+    const { user, setUser } = useAuth();
 
     useEffect(() => {
         if (!userID) return;
@@ -30,6 +75,21 @@ export default function UserPage() {
     useEffect(() => {
         if (!user) navigate("/");
     }, [user, navigate]);
+
+    const handleEditName = async (newName) => {
+        setIsUpdating(true);
+        try {
+            const res = await api.put(`/users/${user._id}`, { name: newName });
+            const updatedUser = { ...user, name: res.data.user.name };
+            setUser(updatedUser);
+            localStorage.setItem("symphonia_user", JSON.stringify(updatedUser));
+            setIsEditModalOpen(false);
+        } catch (error) {
+            alert(error.response?.data?.message || "Erro ao atualizar nome");
+        } finally {
+            setIsUpdating(false);
+        }
+    };
 
     if (user != null) {
         //se usuario n estiver logado, ira ser redirecionado para a pagina inicial, beginpage
@@ -70,8 +130,8 @@ export default function UserPage() {
                                         icon={faPen}
                                         style={{ color: "#fff" }}
                                         className="pencil"
+                                        onClick={() => setIsEditModalOpen(true)}
                                     />
-                                    {/*ÍCONE PARA EDITAR NOME ACIMA*/}
                                 </div>
                             </div>
 
@@ -132,8 +192,19 @@ export default function UserPage() {
                 </>
             );
         }
-    }   else {
+    } else {
         navigate("/")
     }
-}
 
+    return (
+        <>
+            <EditNameModal
+                isOpen={isEditModalOpen}
+                currentName={user?.name || ""}
+                onClose={() => setIsEditModalOpen(false)}
+                onSave={handleEditName}
+                isLoading={isUpdating}
+            />
+        </>
+    );
+}
