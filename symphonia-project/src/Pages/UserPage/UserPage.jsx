@@ -53,11 +53,56 @@ function EditNameModal({ isOpen, currentName, onClose, onSave, isLoading }) {
     );
 }
 
+function EditPhotoModal({ isOpen, currentUrl, onClose, onSave, isLoading }) {
+    const [newUrl, setNewUrl] = useState(currentUrl ?? "");
+
+    useEffect(() => {
+        setNewUrl(currentUrl ?? "");
+    }, [currentUrl, isOpen]);
+
+    const handleSave = async () => {
+        if (newUrl.trim()) {
+            await onSave(newUrl.trim());
+        } else {
+            onClose();
+        }
+    };
+
+    if (!isOpen) return null;
+
+    return (
+        <div className="modal-overlay" onClick={onClose}>
+            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                <h2>Alterar foto por URL</h2>
+                <input
+                    type="url"
+                    value={newUrl}
+                    onChange={(e) => setNewUrl(e.target.value)}
+                    placeholder="https://exemplo.com/foto.jpg"
+                    className="modal-input"
+                    disabled={isLoading}
+                    autoFocus
+                />
+                <div className="modal-buttons">
+                    <button onClick={onClose} disabled={isLoading} className="modal-btn-cancel">
+                        Cancelar
+                    </button>
+                    <button onClick={handleSave} disabled={isLoading} className="modal-btn-save">
+                        {isLoading ? "Salvando..." : "Salvar"}
+                    </button>
+                </div>
+            </div>
+        </div>
+    );
+}
+
 export default function UserPage() {
     const [posts, setPosts] = useState([]);
     const [userFromParam, setUserFromParam] = useState();
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [isUpdating, setIsUpdating] = useState(false);
+    const [isPhotoModalOpen, setIsPhotoModalOpen] = useState(false);
+    const [isUpdatingPhoto, setIsUpdatingPhoto] = useState(false);
 
     const { userID } = useParams();
     const navigate = useNavigate();
@@ -91,6 +136,21 @@ export default function UserPage() {
         }
     };
 
+    const handleSavePhotoUrl = async (photoUrl) => {
+        setIsUpdatingPhoto(true);
+        try {
+            const res = await api.put(`/users/${user._id}`, { photo: photoUrl });
+            const updatedUser = { ...user, photo: res.data.user.photo };
+            setUser(updatedUser);
+            localStorage.setItem("symphonia_user", JSON.stringify(updatedUser));
+            setIsPhotoModalOpen(false);
+        } catch (error) {
+            alert(error.response?.data?.message || "Erro ao atualizar foto");
+        } finally {
+            setIsUpdatingPhoto(false);
+        }
+    };
+
     if (user != null) {
         //se usuario n estiver logado, ira ser redirecionado para a pagina inicial, beginpage
         if (user?._id == userID) {
@@ -102,6 +162,13 @@ export default function UserPage() {
                         onClose={() => setIsEditModalOpen(false)}
                         onSave={handleEditName}
                         isLoading={isUpdating}
+                    />
+                    <EditPhotoModal
+                        isOpen={isPhotoModalOpen}
+                        currentUrl={user?.photo || ""}
+                        onClose={() => setIsPhotoModalOpen(false)}
+                        onSave={handleSavePhotoUrl}
+                        isLoading={isUpdatingPhoto}
                     />
                     <Navbar />
                     <button
@@ -122,11 +189,14 @@ export default function UserPage() {
                                             src={user?.photo}
                                             alt="user-photo"
                                             className="imagem-img"
+                                            onClick={() => setIsPhotoModalOpen(true)}
+                                            style={{ cursor: "pointer" }}
                                         />
                                         <FontAwesomeIcon
                                             icon={faPen}
                                             className="icon"
                                             style={{ color: "#ffffffff" }}
+                                            onClick={() => setIsPhotoModalOpen(true)}
                                         />
                                         {/*ÍCONE PARA EDITAR FOTO ACIMA*/}
                                     </div>
@@ -168,6 +238,13 @@ export default function UserPage() {
                         onClose={() => setIsEditModalOpen(false)}
                         onSave={handleEditName}
                         isLoading={isUpdating}
+                    />
+                    <EditPhotoModal
+                        isOpen={isPhotoModalOpen}
+                        currentUrl={userFromParam?.photo || ""}
+                        onClose={() => setIsPhotoModalOpen(false)}
+                        onSave={handleSavePhotoUrl}
+                        isLoading={isUpdatingPhoto}
                     />
                     <Navbar />
                     <div className="feed-userpage">
@@ -212,3 +289,4 @@ export default function UserPage() {
 
     return null;
 }
+
