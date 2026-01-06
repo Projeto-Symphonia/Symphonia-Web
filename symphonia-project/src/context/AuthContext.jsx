@@ -3,6 +3,12 @@ import api, { setAuthToken } from "../services/api";
 
 const AuthContext = createContext(null);
 
+function normalizeUser(data) {
+  if (!data) return null;
+  const _id = data._id ?? data.id ?? data.userID;
+  return { ...data, _id };
+}
+
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
@@ -10,7 +16,7 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     const savedUser = localStorage.getItem("symphonia_user");
     const savedToken = localStorage.getItem("symphonia_token");
-    if (savedUser) setUser(JSON.parse(savedUser));
+    if (savedUser) setUser(normalizeUser(JSON.parse(savedUser)));
     if (savedToken) {
       setToken(savedToken);
       setAuthToken(savedToken);
@@ -18,39 +24,28 @@ export function AuthProvider({ children }) {
   }, []);
 
   async function login(credentials) {
+    const payload = {
+      name: credentials.username ?? credentials.name ?? credentials.email,
+      password: credentials.password,
+    };
+
     try {
-      const res = await api.post("/login", credentials);
-      if (res?.data?.token) {
-        const t = res.data.token;
-        const u = res.data.user ?? { name: credentials.username ?? credentials.name };
+      const res = await api.post("/users/login", payload);
+      const userData = normalizeUser(res?.data?.user);
+      if (userData) {
+        const t = res?.data?.token ?? "session"; // backend ainda não devolve token real
         setToken(t);
-        setUser(u);
+        setUser(userData);
         localStorage.setItem("symphonia_token", t);
-        localStorage.setItem("symphonia_user", JSON.stringify(u));
+        localStorage.setItem("symphonia_user", JSON.stringify(userData));
         setAuthToken(t);
         return { ok: true };
       }
+      return { ok: false, message: res?.data?.message ?? "Login failed" };
     } catch (e) {
+      const message = e?.response?.data?.message ?? "Login failed";
+      return { ok: false, message };
     }
-
-    try {
-      const resp = await api.get("/users");
-      const users = resp.data || [];
-      const suppliedName = credentials.username ?? credentials.name ?? credentials.email;
-      const found = users.find(u => (u.name === suppliedName) && u.password === credentials.password);
-      if (found) {
-        const fakeToken = "local-dev-token";
-        setToken(fakeToken);
-        setUser(found);
-        localStorage.setItem("symphonia_token", fakeToken);
-        localStorage.setItem("symphonia_user", JSON.stringify(found));
-        setAuthToken(fakeToken);
-        return { ok: true };
-      }
-    } catch (e) {
-    }
-
-    return { ok: false, message: "Login failed" };
   }
 
   async function register(payload) {
@@ -91,3 +86,4 @@ export function useAuth() {
 }
 
 export default AuthContext;
+
