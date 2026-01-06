@@ -84,17 +84,39 @@ class UserController {
     static async updateUser(req, res) {
         try {
             const userID = req.params.id;
-            const oldUser = await user.findById(userID);
-            const newUser = await user.findByIdAndUpdate(userID, req.body);
+            const { name, photo } = req.body;
+            
+            // Check if new name already exists
+            if (name) {
+                const existingUser = await user.findOne({ name, _id: { $ne: userID } });
+                if (existingUser) {
+                    return res.status(400).json({ message: "Username already taken" });
+                }
+            }
+            
+            const updatedUser = await user.findByIdAndUpdate(
+                userID,
+                { ...(name && { name }), ...(photo && { photo }) },
+                { new: true, runValidators: true }
+            );
+            
+            if (!updatedUser) {
+                return res.status(404).json({ message: "User not found" });
+            }
+            
             res.status(200).json({
                 message: "USER UPDATED",
-                oldUser: oldUser,
-                newUser: newUser,
+                user: {
+                    _id: updatedUser._id,
+                    name: updatedUser.name,
+                    photo: updatedUser.photo,
+                },
             });
         } catch (e) {
-            res.status(500).json({ message: "UPDATING POST FAILED", error: e });
+            res.status(500).json({ message: "UPDATING USER FAILED", error: e.message });
         }
     }
 }
 
 export default UserController;
+
