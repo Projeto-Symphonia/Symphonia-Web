@@ -96,6 +96,13 @@ export default function UserPage() {
         if (user?._id == userID) {
             return (
                 <>
+                    <EditNameModal
+                        isOpen={isEditModalOpen}
+                        currentName={user?.name || ""}
+                        onClose={() => setIsEditModalOpen(false)}
+                        onSave={handleEditName}
+                        isLoading={isUpdating}
+                    />
                     <Navbar />
                     <button
                         className="mk-avaliation"
@@ -155,6 +162,13 @@ export default function UserPage() {
         } else if (user?._id != userID) {
             return (
                 <>
+                    <EditNameModal
+                        isOpen={isEditModalOpen}
+                        currentName={user?.name || ""}
+                        onClose={() => setIsEditModalOpen(false)}
+                        onSave={handleEditName}
+                        isLoading={isUpdating}
+                    />
                     <Navbar />
                     <div className="feed-userpage">
                         <main>
@@ -196,15 +210,5 @@ export default function UserPage() {
         navigate("/")
     }
 
-    return (
-        <>
-            <EditNameModal
-                isOpen={isEditModalOpen}
-                currentName={user?.name || ""}
-                onClose={() => setIsEditModalOpen(false)}
-                onSave={handleEditName}
-                isLoading={isUpdating}
-            />
-        </>
-    );
+    return null;
 }
