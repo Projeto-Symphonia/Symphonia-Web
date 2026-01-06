@@ -20,14 +20,16 @@ export default function UserPage() {
     const { user } = useAuth();
 
     useEffect(() => {
+        if (!userID) return;
         api.get(`/users/${userID}`).then((response) => {
-            console.log(response.data.posts);
-            setPosts(response.data.posts);
-
-            console.log(response.data);
+            setPosts(response.data?.posts ?? []);
             setUserFromParam(response.data);
         });
-    }, [navigate]);
+    }, [userID]);
+
+    useEffect(() => {
+        if (!user) navigate("/");
+    }, [user, navigate]);
 
     if (user != null) {
         //se usuario n estiver logado, ira ser redirecionado para a pagina inicial, beginpage
@@ -134,3 +136,4 @@ export default function UserPage() {
         navigate("/")
     }
 }
+
