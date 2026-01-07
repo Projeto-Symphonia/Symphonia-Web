@@ -7,7 +7,7 @@ import { use, useEffect, useState } from "react";
 import PageComment from "../../Components/PageComment/PageComment";
 import { useAuth } from "../../context/AuthContext";
 
-export default function CommentPage(){
+export default function CommentPage() {
     const { postID } = useParams();
     const [post, setPost] = useState(null);
     const [comments, setComments] = useState([]);
@@ -20,74 +20,71 @@ export default function CommentPage(){
         try {
             const res = await api.post(`/comments/criarcomment/${postID}`, {
                 userID: user._id,
-                comment: text
+                comment: text,
             });
             const created = res.data?.newComment ?? null;
             setNewComment("");
-            setComments((prev) => created ? [...prev, created] : prev);
+            setComments((prev) => (created ? [...prev, created] : prev));
         } catch (e) {
             console.error("creating comment failed", e);
         }
     };
- 
-       
-    useEffect(()=>{
 
-        api.get(`/posts`).then((response)=>{
-            const foundPost = response.data.find(p => p._id === postID);
+    useEffect(() => {
+        api.get(`/posts`).then((response) => {
+            const foundPost = response.data.find((p) => p._id === postID);
             setPost(foundPost);
-        })
+        });
 
-        api.get(`/comments/${postID}`).then((response)=>{
+        api.get(`/comments/${postID}`).then((response) => {
             setComments(response.data);
-        })
+        });
     }, [postID]);
 
-    if(!post) return <div>Carregando...</div>;
+    if (!post) return <div>Carregando...</div>;
 
-    return(
+    return (
         <div className="comment-page">
-        <Navbar />
-        <div className='foundpost-box'>
-        <PagePost 
-            key={post._id}
-            post={post}
-            user={post.userID}
-            album={post.albumID}
-            avaliation={post.avaliation}
-            title={post.title}
-            comment={post.comment}
-            comments={comments}
-        />
+            <Navbar />
+            <div className="foundpost-box">
+                <PagePost
+                    key={post._id}
+                    post={post}
+                    user={post.userID}
+                    album={post.albumID}
+                    avaliation={post.avaliation}
+                    title={post.title}
+                    comment={post.comment}
+                    comments={comments}
+                />
+            </div>
+            <div className="comment-form">
+                <textarea
+                    className="comment-input"
+                    value={newComment}
+                    onChange={(e) => setNewComment(e.target.value)}
+                    placeholder="Escreva um comentário..."
+                    rows={3}
+                />
+                <button
+                    className="comment-button"
+                    onClick={handleCreateComment}
+                    disabled={!user || !newComment.trim()}
+                >
+                    Comentar
+                </button>
+            </div>
+            <main className="comments-feed">
+                {comments.map((comment) => (
+                    <PageComment
+                        key={comment._id}
+                        post={post}
+                        user={comment.userID}
+                        title={comment.title}
+                        comment={comment.comment}
+                    />
+                ))}
+            </main>
         </div>
-        <div className="comment-form">
-            <textarea
-                className="comment-input"
-                value={newComment}
-                onChange={(e) => setNewComment(e.target.value)}
-                placeholder="Escreva um comentário..."
-                rows={3}
-            />
-            <button
-                className="comment-button"
-                onClick={handleCreateComment}
-                disabled={!user || !newComment.trim()}
-            >
-                Comentar
-            </button>
-        </div>
-        <main className="comments-feed">
-            {comments.map((comment)=>(
-               <PageComment
-               key={comment._id}
-               post={post}
-               user={comment.userID}
-               title={comment.title}
-               comment={comment.comment}
-               />
-            ))}
-        </main>
-         </div>   
-        
-    )
+    );
 }

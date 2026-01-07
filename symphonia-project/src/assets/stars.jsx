@@ -1,4 +1,4 @@
-export default function Stars({ avaliation, onChange }) {
+export default function Stars({ avaliation, onChange, isCreatePostPage }) {
     let starsColors = ["white", "white", "white", "white", "white"];
     for (let i = 0; i < avaliation; i++) {
         starsColors[i] = "#DEBD00";
@@ -17,8 +17,8 @@ export default function Stars({ avaliation, onChange }) {
         <>
             <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="97"
-                height="18"
+                width={isCreatePostPage? "200" : "97"}
+                height={isCreatePostPage? "50" : "18"}
                 viewBox="0 0 97 18"
                 fill="none"
                 style={{ cursor: cursorStyle, pointerEvents: isClickable ? "auto" : "none" }}

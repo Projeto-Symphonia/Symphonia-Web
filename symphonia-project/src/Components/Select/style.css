@@ -1,0 +1,40 @@
+.select-label {
+    color: white;
+    font-weight: bold;
+}
+
+.simple-select select {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: #212436;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    color: #a1a1a1;
+    font-weight: bold;
+    min-height: 44px;
+    font-size: 15px;
+    cursor: pointer;
+}
+.simple-select select:focus {
+    outline: none;
+    border-color: white;
+    box-shadow: 0 6px 18px rgba(123, 97, 255, 0.12);
+}
+.simple-select optgroup {
+    color: white;
+    background: rgba(0, 0, 0, 0.349);
+}
+.simple-select option {
+    color: white;
+    background: rgba(0, 0, 0, 0.349);
+    font-weight: bold;
+}
+.simple-select option:checked {
+    background: rgba(123, 97, 255, 0.12);
+}
+
+@media (max-width: 640px) {
+    .simple-select select {
+        font-size: 14px;
+    }
+}

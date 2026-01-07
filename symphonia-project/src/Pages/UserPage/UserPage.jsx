@@ -234,20 +234,23 @@ export default function UserPage() {
                                 </div>
                             </div>
 
-                            {posts.map((post) => {
-                                return (
-                                    <PagePost
-                                        key={post._id}
-                                        post={post}
-                                        user={post.userID}
-                                        music={post.musicID}
-                                        album={post.albumID}
-                                        avaliation={post.avaliation}
-                                        title={post.title}
-                                        comment={post.comment}
-                                    />
-                                );
-                            })}
+                            <div className="column">
+                                {posts.map((post) => {
+                                    return (
+                                        <PagePost
+                                            key={post._id}
+                                            post={post}
+                                            user={post.userID}
+                                            music={post.musicID}
+                                            album={post.albumID}
+                                            avaliation={post.avaliation}
+                                            title={post.title}
+                                            comment={post.comment}
+                                            isUser={true}
+                                        />
+                                    );
+                                })}
+                            </div>
                         </div>
                     </main>
                 </>

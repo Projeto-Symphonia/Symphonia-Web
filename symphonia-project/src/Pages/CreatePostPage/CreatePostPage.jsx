@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import Navbar from "../../Components/Navbar/Navbar";
-import Select from "react-select";
+import Select from "../../Components/Select/Select";
+
 import api from "../../services/api";
 import "./style.css";
 import Stars from "../../assets/stars.jsx";
@@ -30,6 +31,12 @@ export default function CreatePostPage() {
     const options = [
         { label: "Álbuns", options: albumOptions },
         { label: "Músicas", options: musicOptions },
+    ];
+    const options2 = [
+        { value: "arroz", label: "Arroz" },
+        { value: "arroz", label: "Arroz" },
+        { value: "arroz", label: "Arroz" },
+        { value: "arroz", label: "Arroz" },
     ];
 
     const handleInputChange = (e) => {
@@ -61,6 +68,7 @@ export default function CreatePostPage() {
         })
             .then((response) => console.log("Post created:", response.data))
             .catch((error) => console.error("Error creating post:", error));
+            navigate("/home")
     };
 
     useEffect(() => {
@@ -79,35 +87,42 @@ export default function CreatePostPage() {
     return (
         <>
             <Navbar />
+            <div className="feed feed-create-post-page">
+                <p className="p1">Criar avaliação</p>
 
-            <main className="criar-post">
+                <p className="select-texto-acima">
+                    Selecione um álbum ou música
+                </p>
                 <Select
                     className="album-select"
-                    classNamePrefix="select"
                     options={options}
-                    placeholder="Selecione um álbum ou música"
                     value={selectedOption}
                     onChange={handleOptionChange}
                 />
-                <br />
+
+                <p className="p2">Dê uma nota(0 a 5 estrelas)</p>
+                <Stars
+                    className="avaliation-stars"
+                    avaliation={avaliation}
+                    onChange={handleAvaliationChange}
+                    isCreatePostPage={true}
+                />
+
+                <p className="p3">Deixe um comentário à música ou álbum avaliado</p>
                 <input
                     className="comment-input"
                     type="text"
                     placeholder="Comente aqui..."
                     onChange={handleInputChange}
                 ></input>
-                <Stars
-                    className="avaliation-stars"
-                    avaliation={avaliation}
-                    onChange={handleAvaliationChange}
-                />
+
                 <button
                     className="create-post-button"
                     onClick={handleCreatePost}
                 >
                     Criar Post
                 </button>
-            </main>
+            </div>
         </>
     );
 }

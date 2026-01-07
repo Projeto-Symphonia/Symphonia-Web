@@ -1,0 +1,108 @@
+.pagepost-container {
+    margin-bottom: 30px;
+    overflow-y: hidden;
+}
+
+.pagepost-barra-superior {
+    border-radius: 20px 20px 0 0;
+    background: #212436;
+    justify-content: start;
+}
+
+.pagepost-conteudo {
+    border-radius: 0 0 20px 20px;
+    background: #16161d;
+    width: 600px;
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
+    overflow-y: hidden;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    overflow-y: hidden;
+    justify-content: start;
+}
+
+.cp1 {
+    margin-top: 2px;
+    color: #fff;
+    font-family: Roboto;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.pagepost-username {
+    color: #00acea;
+    font-family: Roboto;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    transition: opacity 0.15s;
+    cursor: pointer;
+}
+
+.pagepost-username:hover{
+    opacity: 0.8;
+}
+
+/*fotos*/
+.pagepost-user-photo {
+    width: 25px;
+    height: 25px;
+    aspect-ratio: 1/1;
+    margin-left: 10px;
+    border-radius: 100%;
+    transition: opacity 0.15s;
+    cursor: pointer;
+}
+
+.pagepost-user-photo:hover {
+    opacity: 0.8;
+}
+
+.pagepost-album-photo {
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+}
+
+.col1 {
+    margin-left: 10px;
+    margin-top: 40px;
+    align-items: center;
+}
+
+.col2 {
+    margin-bottom: 40px;
+}
+
+.pagepost-comment-icon{
+    margin-left: 265px;
+    cursor: pointer;
+    transition: opacity 0.15s;
+}
+
+.pagepost-comment-icon:hover{
+    opacity: 0.8;
+}
+
+.trashicon{
+    margin-right: -255px;
+    margin-left: 250px;
+    color: red;
+    font-weight: bold;
+    transition: opacity 0.15s;
+    cursor: pointer;
+}
+
+.trashicon:hover{
+    opacity: 0.8;
+}

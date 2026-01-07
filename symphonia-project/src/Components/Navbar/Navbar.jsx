@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { SearchBar } from "../SearchBar/SearchBar";
+import Logo from '../../assets/logo.png'
 
 export default function Navbar({ posts, setSearchResults, isHomePage}) {
     const { user } = useAuth();
@@ -9,7 +10,7 @@ export default function Navbar({ posts, setSearchResults, isHomePage}) {
     return (
         <>
             <header className="topo">
-                <img onClick={()=>{navigate("/home")}} src="../src/assets/logo.png" alt="Logo" className="logo" />
+                <img onClick={()=>{navigate("/home")}} src={Logo} alt="Logo" className="logo" />
 
                 {isHomePage? <SearchBar posts={posts} setSearchResults={setSearchResults} /> : null}
 
