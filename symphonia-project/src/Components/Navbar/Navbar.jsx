@@ -3,9 +3,14 @@ import { useAuth } from "../../context/AuthContext";
 import { SearchBar } from "../SearchBar/SearchBar";
 import Logo from '../../assets/logo.png'
 
-export default function Navbar({ posts, setSearchResults, isHomePage}) {
-    const { user } = useAuth();
+export default function Navbar({ posts, setSearchResults, isHomePage, showLogoutButton = false }) {
+    const { user, logout } = useAuth();
     const navigate = useNavigate();
+
+    const handleLogout = () => {
+        logout();
+        navigate("/");
+    };
 
     return (
         <>
@@ -20,14 +25,33 @@ export default function Navbar({ posts, setSearchResults, isHomePage}) {
                           className="pesquisa"
                        /> */}
 
-                <img
-                    onClick={() => {
-                        navigate(`/user/${user?._id}`);
-                    }}
-                    className="perfil-topo"
-                    src={user?.photo}
-                    alt="user-photo"
-                />
+                <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+                    {showLogoutButton && (
+                        <button 
+                            onClick={handleLogout}
+                            style={{
+                                backgroundColor: '#ff4444',
+                                color: 'white',
+                                border: 'none',
+                                padding: '8px 16px',
+                                borderRadius: '8px',
+                                cursor: 'pointer',
+                                fontWeight: 'bold',
+                                fontSize: '14px'
+                            }}
+                        >
+                            Sair
+                        </button>
+                    )}
+                    <img
+                        onClick={() => {
+                            navigate(`/user/${user?._id}`);
+                        }}
+                        className="perfil-topo"
+                        src={user?.photo}
+                        alt="user-photo"
+                    />
+                </div>
             </header>
         </>
     );

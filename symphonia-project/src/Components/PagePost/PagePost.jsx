@@ -44,44 +44,47 @@ export default function PagePost({
         <>
             <div className="pagepost-container col">
                 <div className="pagepost-barra-superior row">
-                    <img
-                        onClick={() => {
-                            if (user != null) {
-                                navigate(`/user/${user?._id}`);
-                            }
-                        }}
-                        className="pagepost-user-photo"
-                        src={userphoto}
-                        alt="user-photo"
-                    />
-                    <p>
-                        Avaliado por:{" "}
-                        <span
+                    <div className="row">
+                        <img
                             onClick={() => {
                                 if (user != null) {
                                     navigate(`/user/${user?._id}`);
                                 }
                             }}
-                            className="pagepost-username"
-                        >
-                            @{username}{" "}
-                        </span>
-                        {/*isUser ? (
+                            className="pagepost-user-photo"
+                            src={userphoto}
+                            alt="user-photo"
+                        />
+                        <p>
+                            Avaliado por:{" "}
+                            <span
+                                onClick={() => {
+                                    if (user != null) {
+                                        navigate(`/user/${user?._id}`);
+                                    }
+                                }}
+                                className="pagepost-username"
+                            >
+                                @{username}{" "}
+                            </span>
+                        </p>
+                    </div>
+
+                    {/*isUser ? (
                             <span onClick={handleDelete} className="trashicon">
                                 X
                             </span>
                         ) : (
                             none
                         )*/}
-                        <img
-                            onClick={() => {
-                                navigate(`/post/comments/${post?._id}`);
-                            }}
-                            className="pagepost-comment-icon"
-                            src={CommentIcon}
-                            alt=""
-                        />
-                    </p>
+                    <img
+                        onClick={() => {
+                            navigate(`/post/comments/${post?._id}`);
+                        }}
+                        className="pagepost-comment-icon"
+                        src={CommentIcon}
+                        alt=""
+                    />
                 </div>
                 <div className="pagepost-conteudo row">
                     <div className="col col1">
