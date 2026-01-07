@@ -36,6 +36,8 @@
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+    max-width: 130px;
+    text-align: center;
 }
 
 .pagepost-username {

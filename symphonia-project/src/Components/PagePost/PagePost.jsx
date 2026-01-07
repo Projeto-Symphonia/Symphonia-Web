@@ -90,7 +90,7 @@ export default function PagePost({
                     <div className="col col1">
                         <img
                             className="pagepost-album-photo"
-                            src={album?.photo}
+                            src={album?.photo || music?.albumID.photo}
                             alt="album-photo"
                         />
                         <p className="cp1">{album?.title}</p>
