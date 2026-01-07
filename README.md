@@ -26,7 +26,7 @@ Estrutura relevante
 Instalação e execução (desenvolvimento)
 
 Pré-requisitos:
-para prof: criar .env e colocar 'DB_CONNECTION_STRING = mongodb+srv://<nomedeprofessora>:<frutapreferidadela>@cluster0.xkapwde.mongodb.net/symphonia'
+para prof: criar .env e colocar 'DB_CONNECTION_STRING = mongodb+srv://nomedeprofessora:frutapreferidadela@cluster0.xkapwde.mongodb.net/symphonia'
 
 -   Node.js (>= 16)
 -   MongoDB rodando localmente ou URI de conexão
