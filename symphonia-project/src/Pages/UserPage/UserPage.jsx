@@ -8,7 +8,6 @@ import PagePost from "../../Components/PagePost/PagePost";
 import { useAuth } from "../../context/AuthContext";
 
 import "./style.css";
-import "./altStyle.css";
 
 function EditNameModal({ isOpen, currentName, onClose, onSave, isLoading }) {
     const [newName, setNewName] = useState(currentName);
@@ -275,39 +274,30 @@ export default function UserPage() {
                     />
                     <Navbar showLogoutButton={isOwnProfile} />
                     <div className="feed-userpage">
-                        <main>
-                            <div className="menu">
-                                <div className="column">
-                                    <div>
-                                        <img
-                                            src={userFromParam?.photo}
-                                            alt="user-photo"
-                                            id="imagem-img"
+                        <div className="menu">
+                            <div className="column">
+                                <img
+                                    src={userFromParam?.photo}
+                                    alt="user-photo"
+                                    className="imagem-img"
+                                />
+                                <h1 className="name">{userFromParam?.name}</h1>
+                                {posts.map((post) => {
+                                    return (
+                                        <PagePost
+                                            key={post._id}
+                                            post={post}
+                                            user={post.userID}
+                                            music={post.musicID}
+                                            album={post.albumID}
+                                            avaliation={post.avaliation}
+                                            title={post.title}
+                                            comment={post.comment}
                                         />
-                                    </div>
-                                </div>
-                                <div className="row">
-                                    <h1 className="name">
-                                        {userFromParam?.name}
-                                    </h1>
-                                </div>
+                                    );
+                                })}
                             </div>
-
-                            {posts.map((post) => {
-                                return (
-                                    <PagePost
-                                        key={post._id}
-                                        post={post}
-                                        user={post.userID}
-                                        music={post.musicID}
-                                        album={post.albumID}
-                                        avaliation={post.avaliation}
-                                        title={post.title}
-                                        comment={post.comment}
-                                    />
-                                );
-                            })}
-                        </main>
+                        </div>
                     </div>
                 </>
             );
