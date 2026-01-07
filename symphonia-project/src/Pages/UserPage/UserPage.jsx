@@ -124,6 +124,7 @@ export default function UserPage() {
     const navigate = useNavigate();
 
     const { user, setUser } = useAuth();
+    const isOwnProfile = user?._id === userID;
 
     useEffect(() => {
         if (!userID) return;
@@ -188,7 +189,7 @@ export default function UserPage() {
                         onSave={handleSavePhotoUrl}
                         isLoading={isUpdatingPhoto}
                     />
-                    <Navbar />
+                    <Navbar showLogoutButton={isOwnProfile} />
                     <button
                         className="mk-avaliation"
                         onClick={() => {
@@ -272,7 +273,7 @@ export default function UserPage() {
                         onSave={handleSavePhotoUrl}
                         isLoading={isUpdatingPhoto}
                     />
-                    <Navbar />
+                    <Navbar showLogoutButton={isOwnProfile} />
                     <div className="feed-userpage">
                         <main>
                             <div className="menu">
