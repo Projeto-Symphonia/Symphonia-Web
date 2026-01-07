@@ -6,7 +6,7 @@
 .pagepost-barra-superior {
     border-radius: 20px 20px 0 0;
     background: #212436;
-    justify-content: start;
+    width: 600px;
 }
 
 .pagepost-conteudo {
@@ -85,9 +85,10 @@
 }
 
 .pagepost-comment-icon{
-    margin-left: 265px;
     cursor: pointer;
     transition: opacity 0.15s;
+    margin-left: 570px;
+    position: absolute;
 }
 
 .pagepost-comment-icon:hover{
