@@ -49,6 +49,7 @@ export default function HomePage() {
                                 post={post}
                                 user={post.userID}
                                 album={post.albumID}
+                                music={post.musicID}
                                 avaliation={post.avaliation}
                                 title={post.title}
                                 comment={post.comment}

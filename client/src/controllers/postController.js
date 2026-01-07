@@ -5,7 +5,12 @@ import comment from "../models/Comment.js";
 class PostController {
    static async getPosts(req, res) {
       try {
-         const posts = await post.find().populate("albumID musicID userID comments");
+         const posts = await post.find()
+            .populate("albumID userID comments")
+            .populate({
+               path: "musicID",
+               populate: { path: "albumID" }
+            });
          res.status(200).json(posts);
       } catch (e) {
          res.status(500).json({ message: "getting posts failed", error: e });

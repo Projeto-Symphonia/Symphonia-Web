@@ -21,6 +21,10 @@ class UserController {
                 populate: [
                     { path: "userID", select: "name photo" },
                     { path: "albumID", select: "title photo" },
+                    { 
+                        path: "musicID",
+                        populate: { path: "albumID", select: "title photo" }
+                    },
                 ],
             });
             res.status(200).json(especificUser);

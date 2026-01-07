@@ -24,9 +24,12 @@ class CommentController {
             comment: req.body.comment
          });
 
+         //popula os dados do usuário antes de retornar
+         const populatedComment = await newComment.populate("userID");
+
          res.status(200).json({
             message: "SUCCESSFUL",
-            newComment: newComment
+            newComment: populatedComment
          });
       } catch (err) {
          res.status(500).json({ message: "creating comment failed", error: err });

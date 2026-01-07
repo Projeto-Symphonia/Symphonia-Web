@@ -218,6 +218,7 @@ export default function UserPage() {
                                         key={post._id}
                                         post={post}
                                         user={post.userID}
+                                        music={post.musicID}
                                         album={post.albumID}
                                         avaliation={post.avaliation}
                                         title={post.title}
@@ -270,7 +271,9 @@ export default function UserPage() {
                                 return (
                                     <PagePost
                                         key={post._id}
+                                        post={post}
                                         user={post.userID}
+                                        music={post.musicID}
                                         album={post.albumID}
                                         avaliation={post.avaliation}
                                         title={post.title}

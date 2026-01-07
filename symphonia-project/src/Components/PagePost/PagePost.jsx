@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 
 import Stars from "../../assets/stars";
 
-export default function PagePost({ album, avaliation, comment, user, title, post }) {
+export default function PagePost({ album, music, avaliation, comment, user, title, post }) {
    const navigate = useNavigate();
 
    let username;
@@ -51,15 +51,14 @@ export default function PagePost({ album, avaliation, comment, user, title, post
             <div className="conteudo" onClick={()=>{navigate(`/post/comments/${post._id}`)}}>
                <img
                   className="capa-musica"
-                  src={album?.photo}
+                  src={music?.albumID?.photo || album?.photo}
                   alt="album-photo"
                />
 
                <div className="info-musica">
                   <Stars avaliation={avaliation} />
 
-                  <h3 className="titulo">{}</h3>
-                  <p className="banda">{album?.title}</p>
+                  <p className="banda">{music ? music.title : album?.title}</p>
                   <p className="avaliacao-texto">{comment}</p>
                </div>
             </div>
