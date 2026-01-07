@@ -41,10 +41,18 @@ function EditNameModal({ isOpen, currentName, onClose, onSave, isLoading }) {
                     autoFocus
                 />
                 <div className="modal-buttons">
-                    <button onClick={onClose} disabled={isLoading} className="modal-btn-cancel">
+                    <button
+                        onClick={onClose}
+                        disabled={isLoading}
+                        className="modal-btn-cancel"
+                    >
                         Cancelar
                     </button>
-                    <button onClick={handleSave} disabled={isLoading} className="modal-btn-save">
+                    <button
+                        onClick={handleSave}
+                        disabled={isLoading}
+                        className="modal-btn-save"
+                    >
                         {isLoading ? "Salvando..." : "Salvar"}
                     </button>
                 </div>
@@ -84,10 +92,18 @@ function EditPhotoModal({ isOpen, currentUrl, onClose, onSave, isLoading }) {
                     autoFocus
                 />
                 <div className="modal-buttons">
-                    <button onClick={onClose} disabled={isLoading} className="modal-btn-cancel">
+                    <button
+                        onClick={onClose}
+                        disabled={isLoading}
+                        className="modal-btn-cancel"
+                    >
                         Cancelar
                     </button>
-                    <button onClick={handleSave} disabled={isLoading} className="modal-btn-save">
+                    <button
+                        onClick={handleSave}
+                        disabled={isLoading}
+                        className="modal-btn-save"
+                    >
                         {isLoading ? "Salvando..." : "Salvar"}
                     </button>
                 </div>
@@ -117,9 +133,9 @@ export default function UserPage() {
         });
     }, [userID]);
 
-    useEffect(() => {
+    /*useEffect(() => {
         if (!user) navigate("/");
-    }, [user, navigate]);
+    }, [user, navigate]);*/
 
     const handleEditName = async (newName) => {
         setIsUpdating(true);
@@ -139,7 +155,9 @@ export default function UserPage() {
     const handleSavePhotoUrl = async (photoUrl) => {
         setIsUpdatingPhoto(true);
         try {
-            const res = await api.put(`/users/${user._id}`, { photo: photoUrl });
+            const res = await api.put(`/users/${user._id}`, {
+                photo: photoUrl,
+            });
             const updatedUser = { ...user, photo: res.data.user.photo };
             setUser(updatedUser);
             localStorage.setItem("symphonia_user", JSON.stringify(updatedUser));
@@ -151,7 +169,7 @@ export default function UserPage() {
         }
     };
 
-    if (user != null) {
+    if (user?.id != null) {
         //se usuario n estiver logado, ira ser redirecionado para a pagina inicial, beginpage
         if (user?._id == userID) {
             return (
@@ -189,14 +207,18 @@ export default function UserPage() {
                                             src={user?.photo}
                                             alt="user-photo"
                                             className="imagem-img"
-                                            onClick={() => setIsPhotoModalOpen(true)}
+                                            onClick={() =>
+                                                setIsPhotoModalOpen(true)
+                                            }
                                             style={{ cursor: "pointer" }}
                                         />
                                         <FontAwesomeIcon
                                             icon={faPen}
                                             className="icon"
                                             style={{ color: "#ffffffff" }}
-                                            onClick={() => setIsPhotoModalOpen(true)}
+                                            onClick={() =>
+                                                setIsPhotoModalOpen(true)
+                                            }
                                         />
                                         {/*ÍCONE PARA EDITAR FOTO ACIMA*/}
                                     </div>
@@ -287,9 +309,8 @@ export default function UserPage() {
             );
         }
     } else {
-        navigate("/")
+        navigate("/");
     }
 
     return null;
 }
-

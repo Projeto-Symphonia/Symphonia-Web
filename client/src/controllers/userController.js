@@ -39,7 +39,7 @@ class UserController {
     //create user '/users'
     static async createUser(req, res) {
         try {
-            const newUser = req.body;
+            const newUser = { ...req.body, photo: "https://th.bing.com/th/id/R.4e9a9213eb6cacc05b42ead4c364aef8?rik=e%2frEilzC8bkv3g&pid=ImgRaw&r=0" };
             await user.create(newUser);
             res.status(201).json({
                 message: "user created!",
